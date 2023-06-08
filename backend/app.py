@@ -30,3 +30,6 @@ def call_openai_api(text_to_translate, source_lang, target_lang):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+import sys
+print(sys.path)
