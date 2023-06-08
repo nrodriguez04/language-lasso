@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './App.css'
+import './App.css';
+import TranslationForm from './components/TranslationForm';
+import TranslationResult from './components/TranslationResult';
 
 function App() {
-  const [text, setText] = useState('');
   const [translation, setTranslation] = useState('');
 
-  const translateText = async () => {
+  const translateText = async (text) => {
     try {
       const response = await axios.post('http://localhost:5000/translate', { text });
       setTranslation(response.data.translated_text);
@@ -17,17 +18,12 @@ function App() {
 
   return (
     <div>
-      <textarea
-        value={text}
-        onChange={event => setText(event.target.value)}
-      />
-      <button onClick={translateText}>
-        Translate
-      </button>
-      {translation && <p>{translation}</p>}
+      <h1>Language Lasso</h1>
+      <h3>The AI language translation app</h3>
+      <TranslationForm onTranslate={translateText} />
+      <TranslationResult translation={translation} />
     </div>
   );
 }
 
 export default App;
-
